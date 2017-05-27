@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.Dao.vipDao">
+
+    <select id="findAll" resultType="cn.Entity.vipJavaBean">
+        SELECT u.user_id,u.vip_grade,u.vip_id,p.vip_discount,us.user_name FROM vipuser u
+        LEFT JOIN vipprice p ON u.vip_grade=p.vip_grade
+        left join users us on u.user_id=us.user_id
+    </select>
+
+    <select id="findOne"  parameterType="int" resultType="cn.Entity.vipJavaBean">
+       SELECT u.user_id,u.vip_grade,u.vip_id,p.vip_discount,us.user_name  FROM vipuser u
+       LEFT JOIN vipprice p ONu.vip_grade=p.vip_grade
+        LEFT JOIN users us ON u.user_id =us.user_id
+          WHERE u.user_id==#{user_id}
+    </select>
+
+    <insert id="putDate" parameterType="cn.Entity.vipJavaBean" >
+        INSERT INTO vipuser(user_id,vip_grade) VALUES(#{user_id},#{vip_grade})
+    </insert>
+
+    <update id="upData" parameterType="cn.Entity.vipJavaBean" >
+        update vipuser set vip_grade=#{vip_grade} where vip_id=#{vip_id}
+    </update>
+
+</mapper>

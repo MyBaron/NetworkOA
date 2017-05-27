@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.Dao.activityDao">
+    <select id="findAll" resultType="cn.Entity.activityJavaBean">
+        SELECT * FROM activity order by activity_id DESC
+    </select>
+    <insert id="putActicity" parameterType="cn.Entity.activityJavaBean">
+        insert into activity(activity_text,activity_time) VALUES (#{activity_text},#{activity_time})
+    </insert>
+
+    <update id="renewAuto">
+        ALTER TABLE activity AUTO_INCREMENT=1
+    </update>
+
+    <delete id="deleteOne" parameterType="int">
+        delete from activity where activity_id=#{activity_id}
+    </delete>
+</mapper>

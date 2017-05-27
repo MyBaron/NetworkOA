@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.Dao.WorkLogDao">
+    <select id="findtotal"  resultType="int">
+        SELECT count(work_id) from worklog
+    </select>
+
+    <select id="findByAmount" resultType="cn.Entity.WorkLogJB">
+        SELECT w.work_id,w.work_text,w.work_time,a.administrator_name,a.administrator_id  FROM  worklog w  LEFT JOIN  administrator a
+        ON w.administrator_id =a.administrator_id
+        WHERE work_id &gt;#{0} AND work_id &lt;=#{1} ORDER BY work_id DESC
+    </select>
+
+    <select id="findAll" resultType="cn.Entity.WorkLogJB">
+        SELECT w.work_id,w.work_text,w.work_time,a.administrator_name,a.administrator_id  FROM  worklog w  LEFT JOIN  administrator a
+        ON w.administrator_id =a.administrator_id ORDER BY work_id DESC
+    </select>
+    
+    
+    <insert id="putData" parameterType="cn.Entity.WorkLogJB" >
+        INSERT into worklog(administrator_id,work_text) VALUES (#{administrator_id},#{work_text})
+    </insert>
+</mapper>

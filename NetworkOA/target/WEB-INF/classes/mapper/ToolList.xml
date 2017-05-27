@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.Dao.ToolListDao">
+   <select id="selectAll" resultType="cn.Entity.ToolListJB">
+       SELECT * from toollist
+   </select>
+
+    <insert id="putData" >
+        INSERT into toollist(tool_name,tool_sum,tool_principal) VALUES (#{0},#{1},#{2})
+    </insert>
+
+    <update id="alterData">
+        UPDATE toollist set tool_name=#{0},tool_sum=#{1},tool_principal=#{2} where tool_id=#{3}
+    </update>
+
+    <delete id="deleteByTool_id" >
+        delete FROM  toollist where tool_id=#{0}
+    </delete>
+
+
+    <update id="alterAUTO">
+          ALTER TABLE toollist AUTO_INCREMENT=1
+    </update>
+
+</mapper>

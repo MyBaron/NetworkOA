@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.Dao.AssociateLogDao">
+    <select id="selectByAssociate" resultType="cn.Entity.AssociateLogJB">
+         SELECT * FROM associatelog ass
+         LEFT JOIN administrator ad ON ass.administrator_id=ad.administrator_id
+         WHERE associate_open=1
+         ORDER BY associate_id DESC
+    </select>
+
+    <select id="selectAll" resultType="cn.Entity.AssociateLogJB">
+        SELECT * FROM associatelog ass
+         LEFT JOIN administrator ad ON ass.administrator_id=ad.administrator_id
+         ORDER BY associate_id DESC
+    </select>
+
+    <update id="updataByAssocitaLog_id"  >
+              UPDATE associatelog SET associate_text=#{0} WHERE associate_id=#{1}
+    </update>
+
+    <update id="updataAssociate_open">
+          UPDATE associatelog SET associate_open=#{0} WHERE associate_id=#{1}
+    </update>
+
+
+    <select id="findTotal" parameterType="int">
+        select count(associate_id) from associatelog
+    </select>
+
+
+    <insert id="putData" >
+        INSERT INTO associatelog(administrator_id,associate_text)  VALUES (#{0},#{1})
+    </insert>
+</mapper>

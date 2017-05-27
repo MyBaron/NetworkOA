@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="cn.Dao.commentDao">
+    <select id="selectByVenue_name"  resultType="cn.Entity.commentJavaBean">
+        SELECT * from comment where venue_name=#{venue_name}
+    </select>
+
+    <insert id="putDataByVenue_name" parameterType="cn.Entity.commentJavaBean">
+        INSERT into comment(user_id,user_name,comment_text,venue_name) values(#{user_id},#{user_name},#{comment_text},#{venue_name})
+    </insert>
+
+    <select id="selectAll" resultType="cn.Entity.commentJavaBean">
+        SELECT * from comment
+    </select>
+</mapper>
