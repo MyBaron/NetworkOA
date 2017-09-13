@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<link rel="stylesheet" href="./../../dist/themes/default/style.min.css" />
+</head>
+<body>
+
+
+	<div id="testTree"></div>
+    <div id="test1"></div>
+
+
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="jstree.min.js"></script>
+
+	<script type="text/javascript">
+	$("#testTree").jstree({
+        'core':{
+        	'data' :[
+            {
+             "text" : "父亲",
+             "state" : {"select":true},
+             "id" : 0,
+             "children" :[
+             	{"text" : "儿子","id":1},
+             	{"text" : "20","id":2,"children":true}
+               ]
+            }
+        	]
+        }
+	})
+
+     $('#testTree').on("select_node.jstree",function(e,data){
+         console.log("data.id="+data.id);
+         console.log("data.node.id"+data.node.id);
+
+     })
+
+     $('#testTree').on("loaded.jstree",function(){
+        console.log("加载中了噢");
+
+     })
+
+    
+    var s=String('{"data":[{"easwn":"TH03.01","easln":"","children":true,"id":"EAS20","text":"1号仓库","type":"location"},{"easwn":"TH03.02","easln":"","children":true,"id":"EAS21","text":"2号仓库","type":"location"},{"easwn":"TH03.03","easln":"","id":"EAS22","text":"3号仓库","type":"location"},{"easwn":"TH03.04","easln":"","children":true,"id":"EAS23","text":"4号仓库","type":"location"}],"pages":0,"success":true,"time":1503548223835,"total":0}');
+     
+     $("#test1").jstree({
+        'core':{
+            'data' : function(node,cb){
+                console.log("哈哈，我获得了: "+node .id);
+                if (node.id==='#') {
+                   cb([{"text" : "Root", "id" : "1", "children" : true}]);
+                }else{
+                    cb([{"text":"children1","children":true}]);
+                }
+                
+
+            }
+        }
+    })
+
+
+
+
+
+
+
+    /*$('#testTree').jstree({
+        'core' : {
+            'data' : [
+                { "text" : "Root node", "children" : [
+                        { "text" : "Child node 1" },
+                        { "text" : "Child node 2" ,
+                          "children" : true
+                        }
+                ]}
+            ]
+        }
+    });*/
+    </script>
+</body>
+</html>

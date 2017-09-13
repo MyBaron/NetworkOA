@@ -1,8 +1,11 @@
 package cn.Entity;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Created by Administrator on 2017/5/14.
  */
+@Component
 public class AdministratorJB {
     private int administrator_id;
     private String administrator_name;

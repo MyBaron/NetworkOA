@@ -15,11 +15,11 @@ import java.util.List;
 @Service("AssociateService")
 public class AssociateLogServiceImpl implements AssociateLogService {
 
-    private final AssociateLogDao associateLogDao;
-    private Logger logger;
     @Autowired
-    public AssociateLogServiceImpl(AssociateLogDao associateLogDao) {
-        this.associateLogDao = associateLogDao;
+    private AssociateLogDao associateLogDao;
+    private Logger logger;
+
+    public AssociateLogServiceImpl() {
         logger=Logger.getLogger(AdministratorServiceImpl.class);
     }
 
@@ -32,6 +32,17 @@ public class AssociateLogServiceImpl implements AssociateLogService {
 
         return associateLogDao.selectAll();
     }
+
+    public List<AssociateLogJB> findByAmount(int page, int total, int sum) {
+        int start = (page-1)*10;
+
+        if(start<0){
+            start=0;
+        }
+         return associateLogDao.findByAmount(start,10);
+
+    }
+
 
     public boolean updataByAssocitaLog_id( String associate_text,int associate_id) {
         int i = associateLogDao.updataByAssocitaLog_id(associate_text,associate_id);

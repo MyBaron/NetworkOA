@@ -9,13 +9,18 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -45,11 +50,15 @@ public class logController {
 
     //获得该页数的内容
     @RequestMapping("/work/get")
-    private ModelAndView get(@RequestParam("page") int page, Model model){
-        workSame(page,model);
+    private ModelAndView get(@RequestParam("page") int page, Model model,HttpSession session){
 
-        logger.info("获取页数"+page);
+        workSame(workLogService.findtotal(),page,model,1);
 
+        AdministratorJB administrator =(AdministratorJB) session.getAttribute("administrator");
+
+        if(administrator!=null) {
+            logger.info(administrator.getAdministrator_name() + "获取页数" + page);
+        }
         return  new ModelAndView("myjsp/pages/worklog");
     }
 
@@ -62,6 +71,7 @@ public class logController {
         if (session!=null) {
             administrator= (AdministratorJB) session.getAttribute("administrator");
             if(administrator!=null&&content!=null){
+                logger.info(administrator.getAdministrator_name()+"添加了工作内容："+content);
                 boolean b = workLogService.putData(administrator.getAdministrator_id(), content);
                 if (!b){
                     logger.error("保存数据失败，Service类出错");
@@ -73,10 +83,30 @@ public class logController {
         }
 
 
-        workSame(1,model);
+        workSame(1,1,model,2);
 
         return  new ModelAndView("myjsp/pages/worklog");
     }
+
+
+    //根据id获取数据
+    @RequestMapping("/work/{id}")
+
+    private void getByid(@PathVariable int id, HttpServletResponse response){
+        System.out.println("id= " + id);
+        Optional<String> string = Optional.of(workLogService.findById(id));
+        PrintWriter writer;
+        try {
+            response.setCharacterEncoding("utf-8");
+            writer = response.getWriter();
+            writer.write(string.get());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     //获取交接内容
     @RequestMapping("/associate/get")
@@ -139,10 +169,27 @@ public class logController {
         return new ModelAndView("myjsp/pages/associatelog");
     }
 
-    //查询条数
-    private void workSame(int page,Model model){
-       //查找总条数
-        int total = workLogService.findtotal();
+
+    //获取全部交接内容
+    @RequestMapping("/associate/getall")
+    private ModelAndView getall(@RequestParam("page") int page, Model model,HttpSession session){
+        int total = associateLogService.findTotal();
+
+        workSame(associateLogService.findTotal(),page,model,2);
+
+        return new ModelAndView("myjsp/pages/associatelog");
+    }
+
+
+
+
+
+
+    //查询工作条数
+    private void workSame(int total,int page,Model model,int sign){
+
+        logger.info("总页数是："+total);
+
         //算出总页数
         int pages=total/10;
         if(total%10!=0){
@@ -155,8 +202,14 @@ public class logController {
         }else if(page>pages){
             page=pages;
         }
-        List<WorkLogJB> workLog = workLogService.findByAmount(page, total,10);
-        model.addAttribute("workLog",workLog);
+        if(sign==1) {
+            List<WorkLogJB> workLog = workLogService.findByAmount(page, total, 10);
+            model.addAttribute("workLog", workLog);
+        }else {
+            List<AssociateLogJB> associateLog = associateLogService.findByAmount(page, total, 10);
+            model.addAttribute("associate", associateLog);
+            logger.info("全部交接的10条  "+associateLog);
+        }
         model.addAttribute("pagenow",page);
         model.addAttribute("pages",pages);
     }

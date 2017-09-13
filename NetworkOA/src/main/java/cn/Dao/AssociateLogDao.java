@@ -1,6 +1,7 @@
 package cn.Dao;
 
 import cn.Entity.AssociateLogJB;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  *
  * 对associatelog数据表进行操作
  */
+@Component
 public interface AssociateLogDao {
 
     //查询所有associate为1的交接
@@ -29,4 +31,7 @@ public interface AssociateLogDao {
 
     //查询总条数
     int findTotal();
+
+    //每次获取多小页数
+    List<AssociateLogJB> findByAmount(int start,int sum);
 }

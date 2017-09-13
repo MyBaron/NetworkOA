@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.Dao.AssistantDao" >
+
+    <select id="getAll" resultType="cn.Entity.AssistantJB">
+        SELECT * from assistant
+
+    </select>
+
+    <insert id="putData" parameterType="cn.Entity.AssistantJB">
+        insert into assistant(assistant_name,assistant_profession,assistant_grade,assistant_birthday,assistant_phone,assistant_number,assistant_working)
+        VALUES(#{assistant_name},#{assistant_profession},#{assistant_grade},#{assistant_birthday},#{assistant_phone},#{assistant_number},#{assistant_working})
+    </insert>
+
+    <select id="getWorking" resultType="cn.Entity.AssistantJB">
+        SELECT * from assistant where assistant_working=1
+    </select>
+
+    <update id="alterById" parameterType="cn.Entity.AssistantJB">
+        UPDATE assistant SET
+        assistant_name=#{assistant_name},
+        assistant_profession=#{assistant_profession},
+        assistant_grade=#{assistant_grade},
+        assistant_birthday=#{assistant_birthday},
+        assistant_phone=#{assistant_phone},
+        assistant_number=#{assistant_number},
+        assistant_working=#{assistant_working}
+        where assistant_id=#{assistant_id}
+    </update>
+
+</mapper>

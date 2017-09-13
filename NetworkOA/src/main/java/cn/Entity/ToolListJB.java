@@ -1,77 +1,121 @@
 package cn.Entity;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by Administrator on 2017/5/15.
  */
 public class ToolListJB {
-    private int tool_id;
-    private String tool_name;
-    private int tool_sum;
-    private String tool_principal;
-    private Date tool_time;
-
-    public ToolListJB(int tool_id, String tool_name, int tool_sum, String tool_principal, Date tool_time) {
-        this.tool_id = tool_id;
-        this.tool_name = tool_name;
-        this.tool_sum = tool_sum;
-        this.tool_principal = tool_principal;
-        this.tool_time = tool_time;
-    }
+    private int id;
+    private int location_id;
+    private String name;
+    private String number;
+    private String location;      //位置
+    private int sum;
+    private int re_sum;
+    private String remark;
+    private Timestamp make_time;
 
     @Override
     public String toString() {
         return "ToolListJB{" +
-                "tool_id=" + tool_id +
-                ", tool_name='" + tool_name + '\'' +
-                ", tool_sum=" + tool_sum +
-                ", tool_principal='" + tool_principal + '\'' +
-                ", tool_time=" + tool_time +
+                "id=" + id +
+                ", location_id=" + location_id +
+                ", name='" + name + '\'' +
+                ", number='" + number + '\'' +
+                ", location='" + location + '\'' +
+                ", sum=" + sum +
+                ", re_sum=" + re_sum +
+                ", remark='" + remark + '\'' +
+                ", make_time=" + make_time +
                 '}';
-    }
-
-    public int getTool_id() {
-        return tool_id;
-    }
-
-    public void setTool_id(int tool_id) {
-        this.tool_id = tool_id;
-    }
-
-    public String getTool_name() {
-        return tool_name;
-    }
-
-    public void setTool_name(String tool_name) {
-        this.tool_name = tool_name;
-    }
-
-    public int getTool_sum() {
-        return tool_sum;
-    }
-
-    public void setTool_sum(int tool_sum) {
-        this.tool_sum = tool_sum;
-    }
-
-    public String getTool_principal() {
-        return tool_principal;
-    }
-
-    public void setTool_principal(String tool_principal) {
-        this.tool_principal = tool_principal;
-    }
-
-    public Date getTool_time() {
-        return tool_time;
-    }
-
-    public void setTool_time(Date tool_time) {
-        this.tool_time = tool_time;
     }
 
     public ToolListJB() {
         super();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getLocation_id() {
+        return location_id;
+    }
+
+    public void setLocation_id(int location_id) {
+        this.location_id = location_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getSum() {
+        return sum;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
+    }
+
+    public int getRe_sum() {
+        return re_sum;
+    }
+
+    public void setRe_sum(int re_sum) {
+        this.re_sum = re_sum;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Timestamp getMake_time() {
+        return make_time;
+    }
+
+    public void setMake_time(Timestamp make_time) {
+        this.make_time = make_time;
+    }
+
+    public ToolListJB(int id, int location_id, String name, String number, String location, int sum, int re_sum, String remark, Timestamp make_time) {
+        this.id = id;
+        this.location_id = location_id;
+        this.name = name;
+        this.number = number;
+        this.location = location;
+        this.sum = sum;
+        this.re_sum = re_sum;
+        this.remark = remark;
+        this.make_time = make_time;
     }
 }

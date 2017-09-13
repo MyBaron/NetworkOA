@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.Dao.SignDao">
+
+    <select id="findTody" resultType="cn.Entity.SignJB">
+        select  *  from  sign where sign_time =#{0}
+    </select>
+
+    <select id="fingByNameAndMonth" resultType="cn.Entity.SignJB">
+        select  *  from  sign where myname=#{0} and DATE_FORMAT(sign_time,"%Y-%m")=#{1}
+    </select>
+
+
+    <insert id="putData" parameterType="cn.Entity.SignJB">
+        insert into sign(myname,assistant_id,sign_time,sign_begin,sign_end,longtime,account_name) values(#{myname},#{assistant_id},#{sign_time},#{sign_begin},#{sign_end},#{longtime},#{account_name})
+    </insert>
+</mapper>

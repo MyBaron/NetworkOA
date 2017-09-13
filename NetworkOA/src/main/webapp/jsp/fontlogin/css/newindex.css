@@ -1,0 +1,54 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x:hidden;
+
+}
+
+
+.center font{
+    font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+}
+
+.modal-body{
+
+    min-height: 400px;
+}
+
+.tebill{
+    padding: 15px;
+}
+
+.intro-header {
+    position: relative;
+    height: 100%; /* Full PAge */
+    width: 100%;
+    color: #f8f8f8;
+    background: url(../images/intro5.jpg) no-repeat center center;
+    background-size: cover;
+    text-align: center;}
+
+
+.center{
+    position: absolute;
+    left:50%;
+    margin-left: -300px;
+    top: 30%;
+}
+
+#myfont{
+    font-size: 70px;
+    letter-spacing: 5px;
+}
+
+#mytext{
+    min-height: 300px;
+}
+
+
+button{
+    margin: 10px;
+
+}

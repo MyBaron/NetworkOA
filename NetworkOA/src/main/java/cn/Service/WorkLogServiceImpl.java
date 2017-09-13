@@ -14,39 +14,42 @@ import java.util.List;
 @Service("WorkLogService")
 public class WorkLogServiceImpl implements WorkLogService {
 
-    private final WorkLogDao workLogDao;
-    private final WorkLogJB workLogJB;
     @Autowired
-    public WorkLogServiceImpl(WorkLogDao workLogDao, WorkLogJB workLogJB) {
-        this.workLogDao = workLogDao;
-        this.workLogJB = workLogJB;
-    }
+    private  WorkLogDao workLogDao;
+    @Autowired
+    private  WorkLogJB workLogJB;
+
 
     public int findtotal() {
         return workLogDao.findtotal();
     }
     public List<WorkLogJB> findByAmount(int page, int total,int sum) {
-        int start,end;
-        start=total-sum*page;
-        end=total-sum*(page-1);
+        int start;
+        start=(page-1)*10;
         if(start<0){
             start=0;
         }
-        System.out.println(start+" and "+end);
-
-        return workLogDao.findByAmount(start,end);
+        return workLogDao.findByAmount(start,10);
     }
 
     public List<WorkLogJB> findAll() {
         //todo
+        return null;
+    }
 
+    @Override
+    public String findById(int id) {
+
+        if(id!=0) {
+          return workLogDao.findById(id);
+        }
         return null;
     }
 
     public boolean putData(int ad_id, String context) {
        workLogJB.setAdministrator_id(ad_id);
        workLogJB.setWork_text(context);
-        int i = workLogDao.putData(workLogJB);
-        return i!=0;
+       int i = workLogDao.putData(workLogJB);
+       return i!=0;
     }
 }

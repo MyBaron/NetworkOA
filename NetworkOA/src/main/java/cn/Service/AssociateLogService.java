@@ -15,6 +15,9 @@ public interface AssociateLogService {
     //查询所有交接
     List<AssociateLogJB> selectAll();
 
+    //每次获取多小页数
+    List<AssociateLogJB> findByAmount(int page,int total,int sum);
+
     //修改内容
     boolean updataByAssocitaLog_id(String associate_text,int associate_id);
 

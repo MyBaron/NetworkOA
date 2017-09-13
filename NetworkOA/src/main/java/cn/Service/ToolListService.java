@@ -12,15 +12,21 @@ public interface ToolListService {
     //查找所有数据
     List<ToolListJB> selectAll();
 
+    //get获取数据
+    List<ToolListJB> get(String location_id);
+
     //增加数据
-    boolean putData(String tool_name,int tool_sum,String tool_principal);
+    String putData(ToolListJB toolListJB);
 
     //修改数据
-    boolean alterData(String tool_name,int tool_sum,String tool_principal,int tool_id);
+    String alterData(ToolListJB toolListJB);
 
     //删除数据根据toolid
-    boolean deleteByTool_id(int tool_id);
+    String deleteByTool_id(int id);
 
     //重置tool_id自增长
     boolean alterAUTO();
+
+    //树查找
+    String tree(String id);
 }

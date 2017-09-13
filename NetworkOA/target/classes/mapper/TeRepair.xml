@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.Dao.Te_repairDao">
+    
+    <select id="findDoing"  resultType="cn.Entity.TeRepairJB">
+
+       SELECT * from te_repair where is_deal!=2 ;
+    </select>
+
+    <select id="findAll" resultType="cn.Entity.TeRepairJB">
+        SELECT * from te_repair
+        where is_deal=2
+        ORDER by te_repair_id DESC
+        LIMIT #{0},10
+    </select>
+
+
+    
+    <update id="appraise">
+        UPDATE te_repair SET 
+        appraise=#{0},suggest=#{1},sign_user=#{2} 
+        WHERE te_repair_id=#{3}
+    </update>
+
+    <select id="findFinishSum" resultType="int">
+        SELECT count(te_repair_id) mysum  from te_repair where is_deal=2
+    </select>
+
+    <insert id="putData" useGeneratedKeys="true" keyProperty="te_repair_id" parameterType="cn.Entity.TeRepairJB">
+        insert into
+        te_repair(te_repair_name,te_repair_address,te_repair_phone,te_repair_type,te_repair_question,te_repair_message,te_repair_time,bill_id)
+        values(#{te_repair_name},#{te_repair_address},#{te_repair_phone},#{te_repair_type},#{te_repair_question},#{te_repair_message},#{te_repair_time},#{bill_id})
+    </insert>
+
+      <update id="alterDeal">
+             update te_repair set is_deal=#{0},principal=#{1} where te_repair_id=#{2}
+      </update>
+
+      <update id="alterRepair" parameterType="cn.Entity.TeRepairJB">
+          UPDATE  te_repair set
+           te_repair_name=#{te_repair_name},te_repair_address=#{te_repair_address},te_repair_phone=#{te_repair_phone},te_repair_type=#{te_repair_type},te_repair_question=#{te_repair_question},te_repair_message=#{te_repair_message}
+           where te_repair_id=#{te_repair_id}
+      </update>
+
+    <update id="alterReAssistant" >
+            UPDATE te_repair set
+            information=#{0},summarize=#{1} where te_repair_id=#{2}
+    </update>
+
+
+
+    <update id="finish" >
+        UPDATE te_repair set
+        is_deal=#{0},information=#{1},summarize=#{2},assistant=#{3},assistant=#{4} where te_repair_id=#{5}
+    </update>
+
+
+    <select id="findByid" parameterType="Map" resultType="cn.Entity.TeRepairJB">
+        select * from te_repair
+        <choose>
+            <when test="id !=0">
+                where te_repair_id=#{id}
+            </when>
+            <when test="name!=null">
+                where te_repair_name=#{name}
+            </when>
+        </choose>
+
+        order by te_repair_id desc
+
+    </select>
+
+
+</mapper>

@@ -1,7 +1,9 @@
 package cn.Service;
 
 import cn.Entity.AdministratorJB;
+import cn.Entity.VisterAndTimeJB;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,8 +19,14 @@ public interface AdministratorService {
     AdministratorJB login(String account, String password);
 
     //把数据存进数据库（
-    boolean putData(AdministratorJB ad);
+    boolean putData(String name,String account ,String password);
 
     //获取所有的管理员名单
     List<AdministratorJB> selectAll();
+
+    //修改数据
+    boolean alterData(String name,String account ,String password,int id);
+
+    //最近访客
+    LinkedList<VisterAndTimeJB>  vister(AdministratorJB administratorJB, LinkedList<VisterAndTimeJB> linkedList);
 }

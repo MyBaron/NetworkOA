@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/main/resources/mapper/TeRepair.xml" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/mapper/ToolList.xml" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/mapper/WorkLog.xml" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/mapper/administrator.xml" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/mapper/assistant.xml" dialect="MySQL" />
+  </component>
+</project>
